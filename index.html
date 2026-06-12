@@ -16,7 +16,6 @@
     --text: #f0f0f0;
     --muted: #9ca3af;
     --nav-bg: rgba(30,38,30,0.92);
-    --tag-bg: #1a2a1a;
   }
 
   html { scroll-behavior: smooth; }
@@ -42,17 +41,75 @@
     position: relative;
     z-index: 1;
     min-height: 100vh;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem 6rem;
   }
+  .page.active { display: flex; }
+
+  /* ── LANGUAGE SELECTOR ── */
+  #lang-page {
+    gap: 2rem;
+    background: var(--dark);
+  }
+
+  .lang-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(74,222,128,0.3);
+    border-radius: 20px;
+    padding: 3rem 4rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    backdrop-filter: blur(12px);
+  }
+
+  .lang-title {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .lang-subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .lang-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .lang-btn {
+    padding: 0.85rem 2.2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(74,222,128,0.5);
+    background: rgba(74,222,128,0.08);
+    color: var(--green);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .lang-btn:hover {
+    background: rgba(74,222,128,0.2);
+    border-color: var(--green);
+    transform: translateY(-2px);
+  }
+  .lang-btn .flag { font-size: 1.4rem; }
 
   /* ── HOME PAGE ── */
-  #home {
-    gap: 2.5rem;
-  }
+  #home { gap: 2.5rem; }
 
   .hero-card {
     background: var(--card-bg);
@@ -218,7 +275,7 @@
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
     max-width: 1200px;
     width: 100%;
@@ -230,12 +287,15 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .project-card:hover { transform: translateY(-4px); }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
 
   .card-thumb {
-    height: 200px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,35 +303,53 @@
     overflow: hidden;
   }
 
+  /* Badge on thumb */
+  .card-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .card-badge.gold { border-color: #f59e0b; color: #f59e0b; background: rgba(245,158,11,0.12); }
+  .card-badge.live { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
+  .card-badge.finalist { border-color: #a78bfa; color: #a78bfa; background: rgba(167,139,250,0.12); }
+
   .card-thumb-inner {
-    width: 70%;
+    width: 68%;
     background: #1a1a2e;
     border-radius: 8px;
     padding: 0.8rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   }
-  .screen-bar {
-    display: flex; gap: 4px; margin-bottom: 6px;
-  }
+  .screen-bar { display: flex; gap: 4px; margin-bottom: 6px; }
   .screen-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .screen-line {
-    height: 6px; border-radius: 3px; margin: 4px 0;
-    background: rgba(255,255,255,0.1);
-  }
-  .screen-line.green { background: rgba(74,222,128,0.4); }
-  .screen-line.accent { background: rgba(74,222,128,0.2); width: 60%; }
+  .screen-line { height: 6px; border-radius: 3px; margin: 4px 0; background: rgba(255,255,255,0.1); }
 
   .card-body {
-    padding: 1.2rem 1.2rem 0;
+    padding: 1.2rem 1.2rem 0.5rem;
     flex: 1;
     color: #111;
   }
   .card-body h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 800;
     color: #111;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     line-height: 1.3;
+  }
+  .card-desc {
+    font-size: 0.82rem;
+    color: #444;
+    line-height: 1.55;
+    margin-bottom: 0.8rem;
   }
 
   .tags {
@@ -282,7 +360,7 @@
     background: #111;
     color: #fff;
     border-radius: 999px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     padding: 3px 10px;
     font-weight: 500;
   }
@@ -303,14 +381,42 @@
   }
   .card-footer:hover { background: #16a34a; }
 
-  /* ── HIDDEN ── */
-  .page { display: none; }
-  .page.active { display: flex; }
+  /* Lang switcher pill inside app */
+  .lang-switch {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 200;
+    display: flex;
+    background: var(--nav-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 999px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .lang-switch button {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border: none;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    letter-spacing: 0.06em;
+  }
+  .lang-switch button.active-lang {
+    background: rgba(74,222,128,0.15);
+    color: var(--green);
+  }
 
   @media (max-width: 600px) {
     .hero-card { padding: 2rem 1.5rem; }
+    .lang-card { padding: 2rem 1.5rem; }
     .projects-grid { grid-template-columns: 1fr; }
     .nav-item { padding: 0.5rem 0.8rem; font-size: 0.65rem; }
+    .lang-switch { top: 0.7rem; right: 0.7rem; }
   }
 </style>
 </head>
@@ -318,11 +424,27 @@
 
 <canvas id="grid-canvas"></canvas>
 
+<!-- ══ LANGUAGE SELECTOR PAGE ══ -->
+<section class="page active" id="lang-page">
+  <div class="lang-card">
+    <div class="lang-title">Djafarou Abdou</div>
+    <p class="lang-subtitle">Please choose your language / Choisissez votre langue</p>
+    <div class="lang-buttons">
+      <button class="lang-btn" onclick="setLang('fr')">
+        <span class="flag">🇫🇷</span> Français
+      </button>
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="flag">🇬🇧</span> English
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ══ HOME PAGE ══ -->
-<section class="page active" id="home">
+<section class="page" id="home">
   <div class="hero-card">
-    <div class="hero-eyebrow">PORTEFEUILLE</div>
-    <h1 class="hero-title">Bonjour, je suis Abdou !</h1>
+    <div class="hero-eyebrow" id="eyebrow-text">PORTEFEUILLE</div>
+    <h1 class="hero-title" id="hero-greeting">Bonjour, je suis Abdou !</h1>
     <p class="typing-line" id="typing-text"><span class="cursor"></span></p>
   </div>
 </section>
@@ -330,9 +452,9 @@
 <!-- ══ PROJECTS PAGE ══ -->
 <section class="page" id="projects">
   <div class="section-header">
-    <h2>Mon Travail</h2>
-    <p>Voici quelques-uns des projets sur lesquels j'ai travaillé.</p>
-    <em>Certains liens peuvent être en cours de développement.</em>
+    <h2 id="proj-title">Mon Travail</h2>
+    <p id="proj-sub">Voici quelques-uns des projets sur lesquels j'ai travaillé.</p>
+    <em id="proj-note">Certains liens peuvent être en cours de développement.</em>
   </div>
 
   <div class="search-bar">
@@ -343,15 +465,21 @@
   <div class="projects-grid" id="projects-grid"></div>
 </section>
 
+<!-- ══ LANG SWITCH PILL (shown after lang selection) ══ -->
+<div class="lang-switch" id="lang-switch" style="display:none;">
+  <button id="btn-fr" onclick="setLang('fr')">FR</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
 <!-- ══ BOTTOM NAV ══ -->
-<nav class="bottom-nav">
+<nav class="bottom-nav" id="bottom-nav" style="display:none;">
   <button class="nav-item active" id="nav-home" onclick="showPage('home')">
     <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-    Maison
+    <span id="nav-label-home">Maison</span>
   </button>
   <button class="nav-item" id="nav-projects" onclick="showPage('projects')">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    Projets
+    <span id="nav-label-projects">Projets</span>
   </button>
   <a class="nav-item" href="CV_Djafarou_Abdou.pdf" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -369,24 +497,209 @@
 </nav>
 
 <script>
+/* ── TRANSLATIONS ── */
+const i18n = {
+  fr: {
+    eyebrow: 'PORTEFEUILLE',
+    greeting: 'Bonjour, je suis Abdou !',
+    phrases: [
+      "Je suis étudiant en Génie Informatique",
+      "Je suis passionné par le Machine Learning",
+      "Je suis Data Scientist compétiteur",
+      "Je suis formateur Python",
+      "Je suis jeune blogueur UNICEF",
+      "Je suis membre du club robotique",
+      "Je suis 1er en détection d'intrusion réseau"
+    ],
+    projTitle: 'Mon Travail',
+    projSub: "Voici quelques-uns des projets sur lesquels j'ai travaillé.",
+    projNote: "Certains liens peuvent être en cours de développement.",
+    searchPlaceholder: "Recherche de projet / technologie",
+    navHome: 'Maison',
+    navProjects: 'Projets',
+    viewMore: 'Voir plus',
+  },
+  en: {
+    eyebrow: 'PORTFOLIO',
+    greeting: 'Hi, I am Abdou!',
+    phrases: [
+      "I'm a Computer Engineering student",
+      "I'm passionate about Machine Learning",
+      "I'm a competitive Data Scientist",
+      "I'm a Python trainer",
+      "I'm a UNICEF young blogger",
+      "I'm a robotics club member",
+      "I ranked 1st in network intrusion detection"
+    ],
+    projTitle: 'My Work',
+    projSub: "Here are some of the projects I've worked on.",
+    projNote: "Some links may still be under development.",
+    searchPlaceholder: "Search project / technology",
+    navHome: 'Home',
+    navProjects: 'Projects',
+    viewMore: 'View more',
+  }
+};
+
+/* ── PROJECTS DATA (bilingual) ── */
+const projects = [
+  {
+    name: { fr: "Détection d'Intrusion Réseau", en: "Network Intrusion Detection" },
+    tags: ["Python", "LightGBM", "Scikit-learn", "Pandas"],
+    color: "#1a3a2a",
+    accent: "#4ade80",
+    badge: { type: "gold", fr: "🥇 1ère Place", en: "🥇 1st Place" },
+    desc: {
+      fr: "Compétition ML sur Sekcoder : classification de flux réseau en 10 catégories (trafic normal ou famille d'attaque) sur le dataset UNSW-NB15 (180 371 flux, 42 features). Pipeline complet : feature engineering avancé, oversampling ciblé des classes minoritaires, LightGBM avec optimisation de seuils. Macro F1 = 0.6486 — 1ère place publique.",
+      en: "ML competition on Sekcoder: multi-class network traffic classification into 10 categories (normal or attack family) on the UNSW-NB15 dataset (180,371 flows, 42 features). Full pipeline: advanced feature engineering, targeted minority class oversampling, LightGBM with threshold optimization. Macro F1 = 0.6486 — 1st place on the public leaderboard."
+    },
+    link: "https://github.com/DjafarouAbdou909/network-intrusion-detection"
+  },
+  {
+    name: { fr: "ProfilHub — CV QR Code", en: "ProfilHub — QR Code CV" },
+    tags: ["Django", "PostgreSQL", "PythonAnywhere", "HTML/CSS"],
+    color: "#1a2a3a",
+    accent: "#60a5fa",
+    badge: { type: "live", fr: "🟢 En ligne", en: "🟢 Live" },
+    desc: {
+      fr: "Application web complète permettant de créer et partager un CV numérique via QR code. Déployée sur PythonAnywhere avec 85 utilisateurs actifs. Backend Django + PostgreSQL, génération dynamique de QR codes, interface intuitive pour éditer son profil professionnel.",
+      en: "Full-stack web application to create and share a digital CV via QR code. Deployed on PythonAnywhere with 85 active users. Django + PostgreSQL backend, dynamic QR code generation, intuitive UI to edit one's professional profile."
+    },
+    link: "https://cvqrcodec1.pythonanywhere.com/"
+  },
+  {
+    name: { fr: "Vulnérabilité Marché du Travail CI", en: "Youth Labour Market — Côte d'Ivoire" },
+    tags: ["Python", "Pandas", "Matplotlib", "Scikit-learn"],
+    color: "#1a3a3a",
+    accent: "#2dd4bf",
+    badge: { type: "finalist", fr: "🏅 Finaliste", en: "🏅 Finalist" },
+    desc: {
+      fr: "Hackathon World Data Lab. Analyse de la vulnérabilité des jeunes (15–35 ans) sur le marché du travail ivoirien via données OIT 2015-2025. EDA complète, identification de 3 insights clés (paradoxe de l'éducation, écart de genre, piège de l'informalité), modélisation de 3 scénarios politiques à horizon 2035. Finaliste.",
+      en: "World Data Lab Hackathon. Analysis of youth (15–35 years) labour market vulnerability in Côte d'Ivoire using ILO data 2015-2025. Full EDA, identification of 3 key insights (education paradox, gender gap, informality trap), modelling 3 policy scenarios to 2035. Finalist."
+    },
+    link: "https://github.com/DjafarouAbdou909/hackathon-wdl-cote-divoire"
+  },
+  {
+    name: { fr: "Prédiction Performance Académique", en: "Student Performance Prediction" },
+    tags: ["Python", "Scikit-learn", "Statsmodels", "Seaborn"],
+    color: "#3a2a1a",
+    accent: "#f59e0b",
+    desc: {
+      fr: "Modèle de régression linéaire pour prédire le score final d'un étudiant à partir de ses heures d'étude hebdomadaires. L'analyse de corrélation (Pearson r = 0.81) a justifié de simplifier le modèle à une seule variable. Entraîné sur un split 70/30, il atteint une MAE ≈ 7.16 points — très performant pour une régression simple.",
+      en: "Linear regression model to predict a student's final score from weekly study hours. Correlation analysis (Pearson r = 0.81) justified simplifying to a single-variable model. Trained on a 70/30 split, it reaches MAE ≈ 7.16 — strong for a simple regression."
+    },
+    link: "https://github.com/DjafarouAbdou909/Student_Performance"
+  },
+  {
+    name: { fr: "Analyse Churn Télécom", en: "Telecom Churn Analysis" },
+    tags: ["Python", "Pandas", "SciPy", "Seaborn"],
+    color: "#3a1a1a",
+    accent: "#f87171",
+    desc: {
+      fr: "Analyse exploratoire du dataset Telco Customer Churn pour comprendre pourquoi les clients quittent la plateforme. Tests du chi-carré pour valider les associations statistiques, segmentation des profils à risque, et analyse de l'impact des facteurs contractuels et financiers. 3 facteurs clés identifiés pour améliorer la rétention.",
+      en: "Exploratory analysis of the Telco Customer Churn dataset to understand why customers leave. Chi-square tests to validate statistical associations, at-risk profile segmentation, and analysis of contractual and financial factor impact. 3 key churn drivers identified to guide retention strategies."
+    },
+    link: "https://github.com/DjafarouAbdou909/FUTURE_DS_02"
+  },
+  {
+    name: { fr: "Entonnoir E-commerce", en: "E-commerce Conversion Funnel" },
+    tags: ["Python", "Pandas", "Matplotlib", "Missingno"],
+    color: "#2a3a1a",
+    accent: "#86efac",
+    desc: {
+      fr: "Analyse du parcours utilisateur sur une plateforme e-commerce pour identifier les points de friction. Résultat clé : seulement 2.2% des vues aboutissent au panier, mais 77.8% des paniers se convertissent en achat. La friction est au début du tunnel. Segmentation en 3 profils utilisateurs : visiteur, intéressé, acheteur.",
+      en: "Analysis of the user journey on an e-commerce platform to identify friction points. Key result: only 2.2% of views lead to cart, but 77.8% of carts convert to purchase. Friction is at the top of the funnel. Users segmented into 3 profiles: visitor, interested, buyer."
+    },
+    link: "https://github.com/DjafarouAbdou909/FUTURE_DS_03"
+  },
+  {
+    name: { fr: "Analyse Ventes en Ligne", en: "Online Retail Sales Analysis" },
+    tags: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+    color: "#2a1a3a",
+    accent: "#a78bfa",
+    desc: {
+      fr: "Analyse transactionnelle d'un dataset retail en ligne (colonnes : InvoiceNo, StockCode, CustomerID, Country). Identification des 20 produits générant le plus de revenus, distribution géographique du CA, analyse des tendances temporelles (saisonnalité mensuelle et hebdomadaire), et recommandations business actionables.",
+      en: "Transactional analysis of an online retail dataset (InvoiceNo, StockCode, CustomerID, Country). Identification of the top 20 revenue-generating products, geographic revenue distribution, time-series trend analysis (monthly and weekly seasonality), and actionable business recommendations."
+    },
+    link: "https://github.com/DjafarouAbdou909/FUTURE_DS_01"
+  },
+  {
+    name: { fr: "Mode de Vie & GPA Étudiant", en: "Student Lifestyle & GPA Analysis" },
+    tags: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+    color: "#1a2a2a",
+    accent: "#67e8f9",
+    desc: {
+      fr: "EDA sur 2 000 étudiants pour étudier l'impact de la répartition du temps (étude, sommeil, activités physiques/sociales) sur le GPA et le niveau de stress. Validation de la contrainte d'intégrité temporelle (somme = 24h), GPA moyen observé de 3.12, et création d'une variable catégorielle de groupes d'heures d'étude.",
+      en: "EDA on 2,000 students to study how time allocation (study, sleep, physical/social activities) impacts GPA and stress level. Temporal integrity validation (daily total = 24h), observed mean GPA of 3.12, and feature engineering of study hours group categories."
+    },
+    link: "https://github.com/DjafarouAbdou909/Student_Lifestyle_Project"
+  },
+  {
+    name: { fr: "Prédiction Prix Immobiliers", en: "House Prices Prediction" },
+    tags: ["Python", "Scikit-learn", "Pandas", "Seaborn"],
+    color: "#3a1a2a",
+    accent: "#f472b6",
+    desc: {
+      fr: "Projet de data science complet sur le dataset Kaggle House Prices : EDA approfondie pour identifier les variables influençant le prix de vente, nettoyage des données et feature engineering, puis modélisation prédictive par régression. Inclus dans un portfolio end-to-end préparé pour les assessments techniques du Orange Digital Center.",
+      en: "End-to-end data science project on the Kaggle House Prices dataset: in-depth EDA to identify sale price drivers, data cleaning and feature engineering, then predictive regression modelling. Part of a full portfolio prepared for Orange Digital Center technical assessments."
+    },
+    link: "https://github.com/DjafarouAbdou909/data-analysis-portfolio"
+  }
+];
+
+/* ── STATE ── */
+let currentLang = 'fr';
+let typingActive = false;
+
+/* ── LANGUAGE SETUP ── */
+function setLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+
+  // Update static text
+  document.getElementById('eyebrow-text').textContent = t.eyebrow;
+  document.getElementById('hero-greeting').textContent = t.greeting;
+  document.getElementById('proj-title').textContent = t.projTitle;
+  document.getElementById('proj-sub').textContent = t.projSub;
+  document.getElementById('proj-note').textContent = t.projNote;
+  document.getElementById('search-input').placeholder = t.searchPlaceholder;
+  document.getElementById('nav-label-home').textContent = t.navHome;
+  document.getElementById('nav-label-projects').textContent = t.navProjects;
+
+  // Active lang button
+  document.getElementById('btn-fr').classList.toggle('active-lang', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active-lang', lang === 'en');
+
+  // Show UI elements
+  document.getElementById('bottom-nav').style.display = 'flex';
+  document.getElementById('lang-switch').style.display = 'flex';
+
+  // Re-render projects
+  renderProjects(projects);
+
+  // Switch to home
+  showPage('home');
+
+  // Start typing
+  startTyping(t.phrases);
+}
+
 /* ── ANIMATED GRID ── */
 const canvas = document.getElementById('grid-canvas');
 const ctx = canvas.getContext('2d');
-let W, H, cols, rows, cells;
+let W, H, cells;
 
 function initGrid() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
-  const SIZE = 28, GAP = 4;
-  const step = SIZE + GAP;
-  cols = Math.ceil(W / step) + 1;
-  rows = Math.ceil(H / step) + 1;
+  const SIZE = 28, GAP = 4, step = SIZE + GAP;
+  const cols = Math.ceil(W / step) + 1;
+  const rows = Math.ceil(H / step) + 1;
   cells = [];
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       cells.push({
-        x: c * step, y: r * step,
-        s: SIZE,
+        x: c * step, y: r * step, s: SIZE,
         alpha: Math.random() * 0.25 + 0.03,
         target: Math.random() * 0.25 + 0.03,
         speed: Math.random() * 0.008 + 0.002
@@ -401,18 +714,12 @@ function animGrid() {
     if (Math.random() < 0.001) cell.target = Math.random() < 0.15 ? Math.random() * 0.55 + 0.2 : Math.random() * 0.08 + 0.02;
     cell.alpha += (cell.target - cell.alpha) * cell.speed;
     ctx.fillStyle = `rgba(74,222,128,${cell.alpha})`;
-    const r = 3;
-    const x = cell.x, y = cell.y, s = cell.s;
+    const r = 3, x = cell.x, y = cell.y, s = cell.s;
     ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + s - r, y);
-    ctx.quadraticCurveTo(x + s, y, x + s, y + r);
-    ctx.lineTo(x + s, y + s - r);
-    ctx.quadraticCurveTo(x + s, y + s, x + s - r, y + s);
-    ctx.lineTo(x + r, y + s);
-    ctx.quadraticCurveTo(x, y + s, x, y + s - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.moveTo(x+r,y); ctx.lineTo(x+s-r,y); ctx.quadraticCurveTo(x+s,y,x+s,y+r);
+    ctx.lineTo(x+s,y+s-r); ctx.quadraticCurveTo(x+s,y+s,x+s-r,y+s);
+    ctx.lineTo(x+r,y+s); ctx.quadraticCurveTo(x,y+s,x,y+s-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
     ctx.fill();
   });
   requestAnimationFrame(animGrid);
@@ -423,34 +730,33 @@ initGrid();
 animGrid();
 
 /* ── TYPING EFFECT ── */
-const phrases = [
-  "Je suis étudiant en Génie Informatique",
-  "Je suis passionné par le Machine Learning",
-  "Je suis Data Scientist compétiteur",
-  "Je suis formateur Python",
-  "Je suis jeune blogueur UNICEF",
-  "Je suis membre du club robotique",
-  "Je suis 1er en détection d'intrusion réseau"
-];
+let typingTimeout = null;
+let typingPhrases = [];
 let pi = 0, ci = 0, deleting = false;
 const el = document.getElementById('typing-text');
 
+function startTyping(phrases) {
+  typingPhrases = phrases;
+  pi = 0; ci = 0; deleting = false;
+  if (typingTimeout) clearTimeout(typingTimeout);
+  type();
+}
+
 function type() {
-  const phrase = phrases[pi];
+  const phrase = typingPhrases[pi];
   const cursor = '<span class="cursor"></span>';
   if (!deleting) {
     ci++;
     el.innerHTML = phrase.slice(0, ci) + cursor;
-    if (ci === phrase.length) { deleting = true; setTimeout(type, 2200); return; }
-    setTimeout(type, 55);
+    if (ci === phrase.length) { deleting = true; typingTimeout = setTimeout(type, 2200); return; }
+    typingTimeout = setTimeout(type, 55);
   } else {
     ci--;
     el.innerHTML = phrase.slice(0, ci) + cursor;
-    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); return; }
-    setTimeout(type, 28);
+    if (ci === 0) { deleting = false; pi = (pi + 1) % typingPhrases.length; typingTimeout = setTimeout(type, 400); return; }
+    typingTimeout = setTimeout(type, 28);
   }
 }
-setTimeout(type, 800);
 
 /* ── PAGE NAVIGATION ── */
 function showPage(id) {
@@ -461,74 +767,7 @@ function showPage(id) {
   if (btn) btn.classList.add('active');
 }
 
-/* ── PROJECTS DATA ── */
-const projects = [
-  {
-    name: "Détection d'Intrusion Réseau",
-    tags: ["Python", "LightGBM", "Scikit-learn", "Pandas"],
-    color: "#1a3a2a",
-    accent: "#4ade80",
-    desc: "Classification multi-classes (10 types) sur UNSW-NB15. 1re place publique, F1 = 0.6486.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "ProfilHub — CV QR Code",
-    tags: ["Django", "PostgreSQL", "PythonAnywhere", "HTML/CSS"],
-    color: "#1a2a3a",
-    accent: "#60a5fa",
-    desc: "Application web de génération de CV numériques via QR code. 85 utilisateurs actifs en production.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Djamah — Plateforme Étudiante",
-    tags: ["Django", "PostgreSQL", "Redis", "Scikit-learn"],
-    color: "#2a1a3a",
-    accent: "#a78bfa",
-    desc: "Réseau pair-à-pair de support et partage de ressources pour étudiants africains.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Prédiction Performance Académique",
-    tags: ["Python", "Scikit-learn", "Statsmodels", "Seaborn"],
-    color: "#3a2a1a",
-    accent: "#f59e0b",
-    desc: "Régression linéaire sur heures d'étude et score final. Pearson r = 0.81, MAE ≈ 7.16.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Analyse Churn Télécom",
-    tags: ["Python", "Pandas", "SciPy", "Seaborn"],
-    color: "#3a1a1a",
-    accent: "#f87171",
-    desc: "Tests du chi-carré pour sélection de variables. 3 facteurs clés identifiés.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Vulnérabilité Marché du Travail CI",
-    tags: ["Python", "Pandas", "Matplotlib", "Scikit-learn"],
-    color: "#1a3a3a",
-    accent: "#2dd4bf",
-    desc: "Hackathon World Data Lab. EDA sur données OIT 2015-2025, 3 scénarios politiques à 2035. Finaliste.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Entonnoir E-commerce",
-    tags: ["Python", "Pandas", "Matplotlib"],
-    color: "#2a3a1a",
-    accent: "#86efac",
-    desc: "2.2% des vues aboutissent au panier, 77.8% des paniers à l'achat. Segmentation 3 profils.",
-    link: "https://github.com/DjafarouAbdou909"
-  },
-  {
-    name: "Prédiction Prix Immobiliers",
-    tags: ["Python", "Scikit-learn", "Pandas", "Seaborn"],
-    color: "#3a1a2a",
-    accent: "#f472b6",
-    desc: "Régression sur le dataset House Prices (Kaggle). EDA complète et modélisation prédictive.",
-    link: "https://github.com/DjafarouAbdou909"
-  }
-];
-
+/* ── PROJECTS RENDERING ── */
 function makeScreen(accent) {
   return `
     <div class="card-thumb-inner">
@@ -537,41 +776,50 @@ function makeScreen(accent) {
         <div class="screen-dot" style="background:#f59e0b"></div>
         <div class="screen-dot" style="background:#22c55e"></div>
       </div>
-      <div class="screen-line green" style="background:${accent}55;width:80%"></div>
+      <div class="screen-line" style="background:${accent}55;width:80%"></div>
       <div class="screen-line" style="width:100%"></div>
       <div class="screen-line" style="width:65%"></div>
-      <div class="screen-line green" style="background:${accent}33;width:90%"></div>
+      <div class="screen-line" style="background:${accent}33;width:90%"></div>
       <div class="screen-line" style="width:50%"></div>
       <div class="screen-line" style="width:75%"></div>
-      <div class="screen-line green" style="background:${accent}44;width:40%"></div>
+      <div class="screen-line" style="background:${accent}44;width:40%"></div>
     </div>`;
 }
 
 function renderProjects(list) {
+  const t = i18n[currentLang];
   const grid = document.getElementById('projects-grid');
-  grid.innerHTML = list.map(p => `
-    <div class="project-card" data-name="${p.name.toLowerCase()}" data-tags="${p.tags.join(' ').toLowerCase()}">
+  grid.innerHTML = list.map(p => {
+    const badgeHtml = p.badge
+      ? `<div class="card-badge ${p.badge.type}">${p.badge[currentLang]}</div>`
+      : '';
+    return `
+    <div class="project-card" data-name="${p.name[currentLang].toLowerCase()}" data-tags="${p.tags.join(' ').toLowerCase()}">
       <div class="card-thumb" style="background:${p.color}">
         ${makeScreen(p.accent)}
+        ${badgeHtml}
       </div>
       <div class="card-body">
-        <h3>${p.name}</h3>
-        <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <h3>${p.name[currentLang]}</h3>
+        <p class="card-desc">${p.desc[currentLang]}</p>
+        <div class="tags">${p.tags.map(tg => `<span class="tag">${tg}</span>`).join('')}</div>
       </div>
-      <a class="card-footer" href="${p.link}" target="_blank">Voir plus</a>
-    </div>
-  `).join('');
+      <a class="card-footer" href="${p.link}" target="_blank">${t.viewMore}</a>
+    </div>`;
+  }).join('');
 }
 
 function filterProjects() {
   const q = document.getElementById('search-input').value.toLowerCase();
   const filtered = projects.filter(p =>
-    p.name.toLowerCase().includes(q) ||
-    p.tags.some(t => t.toLowerCase().includes(q))
+    p.name[currentLang].toLowerCase().includes(q) ||
+    p.tags.some(tg => tg.toLowerCase().includes(q)) ||
+    p.desc[currentLang].toLowerCase().includes(q)
   );
   renderProjects(filtered);
 }
 
+/* Initial render (will be overwritten after lang select) */
 renderProjects(projects);
 </script>
 </body>
