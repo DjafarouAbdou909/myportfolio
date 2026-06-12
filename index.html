@@ -321,6 +321,7 @@
   .card-badge.gold { border-color: #f59e0b; color: #f59e0b; background: rgba(245,158,11,0.12); }
   .card-badge.live { border-color: #4ade80; color: #4ade80; background: rgba(74,222,128,0.12); }
   .card-badge.finalist { border-color: #a78bfa; color: #a78bfa; background: rgba(167,139,250,0.12); }
+  .card-badge.silver { border-color: #94a3b8; color: #cbd5e1; background: rgba(148,163,184,0.12); }
 
   .card-thumb-inner {
     width: 68%;
@@ -640,10 +641,33 @@ const projects = [
     color: "#3a1a2a",
     accent: "#f472b6",
     desc: {
-      fr: "Projet de data science complet sur le dataset Kaggle House Prices : EDA approfondie pour identifier les variables influençant le prix de vente, nettoyage des données et feature engineering, puis modélisation prédictive par régression. Inclus dans un portfolio end-to-end préparé pour les assessments techniques du Orange Digital Center.",
-      en: "End-to-end data science project on the Kaggle House Prices dataset: in-depth EDA to identify sale price drivers, data cleaning and feature engineering, then predictive regression modelling. Part of a full portfolio prepared for Orange Digital Center technical assessments."
+      fr: "Régression sur le dataset Kaggle House Prices : EDA approfondie pour identifier les variables influençant le prix de vente (surface, quartier, année de construction), nettoyage des données, feature engineering, et modélisation prédictive. Préparé pour les assessments techniques du Orange Digital Center.",
+      en: "Regression on the Kaggle House Prices dataset: in-depth EDA to identify sale price drivers (area, neighbourhood, year built), data cleaning, feature engineering, and predictive modelling. Prepared for Orange Digital Center technical assessments."
     },
-    link: "https://github.com/DjafarouAbdou909/data-analysis-portfolio"
+    link: "https://github.com/DjafarouAbdou909/data-analysis-portfolio/tree/main/house-prices-regression"
+  },
+  {
+    name: { fr: "Survie sur le Titanic", en: "Titanic Survival Classification" },
+    tags: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+    color: "#1a1a3a",
+    accent: "#818cf8",
+    desc: {
+      fr: "Classification binaire (survivant / non-survivant) sur le dataset Titanic de Kaggle. EDA complète pour analyser l'impact du genre, de la classe et de l'âge sur la survie, feature engineering, et entraînement d'un modèle de classification. Partie du portfolio end-to-end Orange Digital Center.",
+      en: "Binary classification (survived / not survived) on the Kaggle Titanic dataset. Full EDA to analyse the impact of gender, class, and age on survival, feature engineering, and classification model training. Part of the Orange Digital Center end-to-end portfolio."
+    },
+    link: "https://github.com/DjafarouAbdou909/data-analysis-portfolio/tree/main/titanic-survival-classification"
+  },
+  {
+    name: { fr: "Plateforme Campus — Présence & Annonces", en: "Campus Platform — Attendance & Announcements" },
+    tags: ["HTML", "CSS", "JavaScript"],
+    color: "#2a1a1a",
+    accent: "#fb923c",
+    badge: { type: "silver", fr: "🥈 2ème Place Hackathon", en: "🥈 2nd Place Hackathon" },
+    desc: {
+      fr: "Application web développée en équipe lors d'un hackathon, terminée 2ème place. Plateforme de gestion de présence et d'annonces pour un campus universitaire : suivi des étudiants, diffusion d'annonces, interface administrateur. Entièrement réalisée en HTML, CSS et JavaScript vanilla.",
+      en: "Web application built as a team during a hackathon, finishing in 2nd place. Campus management platform for student attendance tracking and announcements: student monitoring, announcement broadcasting, admin interface. Built entirely with vanilla HTML, CSS and JavaScript."
+    },
+    link: "https://github.com/studentcomputerscience05-web/gp3code"
   }
 ];
 
