@@ -405,7 +405,7 @@
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
     <span id="nav-label-projects">Projects</span>
   </button>
-  <a class="nav-item" href="https://drive.google.com/file/d/1pOStGTaI5-wsSiDnkLDDjqv_oHsZbvST/view?usp=sharing" target="_blank">
+  <a class="nav-item" id="nav-cv" href="https://drive.google.com/file/d/1Kuhusnlg18xhD4Wx87QQMWJTdwcW_JJG/view?usp=sharing" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
     CV
   </a>
@@ -479,7 +479,7 @@ const projects = [
     link: "https://github.com/DjafarouAbdou909/network-intrusion-detection"
   },
   {
-    name: { fr: "ProfilHub CV QR Code", en: "ProfilHub — QR Code CV" },
+    name: { fr: "ProfilHub CV QR Code", en: "ProfilHub QR Code CV" },
     tags: ["Django", "PostgreSQL", "PythonAnywhere", "HTML/CSS"],
     color: "#1a2a3a",
     accent: "#60a5fa",
@@ -492,7 +492,7 @@ const projects = [
     link: "https://cvqrcodec1.pythonanywhere.com/"
   },
   {
-    name: { fr: "Vulnérabilité Marché du Travail CI", en: "Youth Labour Market — Côte d'Ivoire" },
+    name: { fr: "Vulnérabilité Marché du Travail CI", en: "Youth Labour Market Côte d'Ivoire" },
     tags: ["Python", "Pandas", "Matplotlib", "Scikit-learn"],
     color: "#1a3a3a",
     accent: "#2dd4bf",
@@ -617,6 +617,11 @@ function setLang(lang) {
   document.getElementById('nav-label-projects').textContent = t.navProjects;
   document.getElementById('btn-fr').classList.toggle('active-lang', lang === 'fr');
   document.getElementById('btn-en').classList.toggle('active-lang', lang === 'en');
+  const cvLinks = {
+    fr: 'https://drive.google.com/file/d/1pOStGTaI5-wsSiDnkLDDjqv_oHsZbvST/view',
+    en: 'https://drive.google.com/file/d/1Kuhusnlg18xhD4Wx87QQMWJTdwcW_JJG/view?usp=sharing'
+  };
+  document.getElementById('nav-cv').href = cvLinks[lang];
   renderProjects(projects);
   startTyping(t.phrases);
 }
