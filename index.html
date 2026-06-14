@@ -28,7 +28,6 @@
     overflow-x: hidden;
   }
 
-  /* ── GRID BACKGROUND ── */
   #grid-canvas {
     position: fixed;
     inset: 0;
@@ -36,7 +35,6 @@
     pointer-events: none;
   }
 
-  /* ── PAGES ── */
   .page {
     position: relative;
     z-index: 1;
@@ -49,66 +47,6 @@
   }
   .page.active { display: flex; }
 
-  /* ── LANGUAGE SELECTOR ── */
-  #lang-page {
-    gap: 2rem;
-    background: var(--dark);
-  }
-
-  .lang-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(74,222,128,0.3);
-    border-radius: 20px;
-    padding: 3rem 4rem;
-    text-align: center;
-    max-width: 500px;
-    width: 100%;
-    backdrop-filter: blur(12px);
-  }
-
-  .lang-title {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 0.5rem;
-  }
-
-  .lang-subtitle {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .lang-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .lang-btn {
-    padding: 0.85rem 2.2rem;
-    border-radius: 12px;
-    border: 2px solid rgba(74,222,128,0.5);
-    background: rgba(74,222,128,0.08);
-    color: var(--green);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.04em;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .lang-btn:hover {
-    background: rgba(74,222,128,0.2);
-    border-color: var(--green);
-    transform: translateY(-2px);
-  }
-  .lang-btn .flag { font-size: 1.4rem; }
-
-  /* ── HOME PAGE ── */
   #home { gap: 2.5rem; }
 
   .hero-card {
@@ -167,7 +105,6 @@
   }
   @keyframes blink { 50% { opacity: 0; } }
 
-  /* ── BOTTOM NAV ── */
   .bottom-nav {
     position: fixed;
     bottom: 1.5rem;
@@ -219,7 +156,6 @@
     flex-shrink: 0;
   }
 
-  /* ── PROJECTS PAGE ── */
   #projects {
     padding-top: 4rem;
     justify-content: flex-start;
@@ -310,7 +246,6 @@
     display: block;
   }
 
-  /* Badge on thumb */
   .card-badge {
     position: absolute;
     top: 10px;
@@ -389,7 +324,6 @@
   }
   .card-footer:hover { background: #16a34a; }
 
-  /* Lang switcher pill inside app */
   .lang-switch {
     position: fixed;
     top: 1rem;
@@ -421,7 +355,6 @@
 
   @media (max-width: 600px) {
     .hero-card { padding: 2rem 1.5rem; }
-    .lang-card { padding: 2rem 1.5rem; }
     .projects-grid { grid-template-columns: 1fr; }
     .nav-item { padding: 0.5rem 0.8rem; font-size: 0.65rem; }
     .lang-switch { top: 0.7rem; right: 0.7rem; }
@@ -432,27 +365,11 @@
 
 <canvas id="grid-canvas"></canvas>
 
-<!-- ══ LANGUAGE SELECTOR PAGE ══ -->
-<section class="page active" id="lang-page">
-  <div class="lang-card">
-    <div class="lang-title">Djafarou Abdou</div>
-    <p class="lang-subtitle">Please choose your language / Choisissez votre langue</p>
-    <div class="lang-buttons">
-      <button class="lang-btn" onclick="setLang('fr')">
-        <span class="flag">🇫🇷</span> Français
-      </button>
-      <button class="lang-btn" onclick="setLang('en')">
-        <span class="flag">🇬🇧</span> English
-      </button>
-    </div>
-  </div>
-</section>
-
 <!-- ══ HOME PAGE ══ -->
-<section class="page" id="home">
+<section class="page active" id="home">
   <div class="hero-card">
-    <div class="hero-eyebrow" id="eyebrow-text">PORTEFEUILLE</div>
-    <h1 class="hero-title" id="hero-greeting">Bonjour, je suis Abdou !</h1>
+    <div class="hero-eyebrow" id="eyebrow-text">PORTFOLIO</div>
+    <h1 class="hero-title" id="hero-greeting">Hi, I am Abdou!</h1>
     <p class="typing-line" id="typing-text"><span class="cursor"></span></p>
   </div>
 </section>
@@ -460,34 +377,34 @@
 <!-- ══ PROJECTS PAGE ══ -->
 <section class="page" id="projects">
   <div class="section-header">
-    <h2 id="proj-title">Mon Travail</h2>
-    <p id="proj-sub">Voici quelques-uns des projets sur lesquels j'ai travaillé.</p>
-    <em id="proj-note">Certains liens peuvent être en cours de développement.</em>
+    <h2 id="proj-title">My Work</h2>
+    <p id="proj-sub">Here are some of the projects I've worked on.</p>
+    <em id="proj-note">Some links may still be under development.</em>
   </div>
 
   <div class="search-bar">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="search-input" placeholder="Recherche de projet / technologie" oninput="filterProjects()">
+    <input type="text" id="search-input" placeholder="Search project / technology" oninput="filterProjects()">
   </div>
 
   <div class="projects-grid" id="projects-grid"></div>
 </section>
 
-<!-- ══ LANG SWITCH PILL (shown after lang selection) ══ -->
-<div class="lang-switch" id="lang-switch" style="display:none;">
+<!-- ══ LANG SWITCH PILL ══ -->
+<div class="lang-switch" id="lang-switch">
   <button id="btn-fr" onclick="setLang('fr')">FR</button>
-  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-en" onclick="setLang('en')" class="active-lang">EN</button>
 </div>
 
 <!-- ══ BOTTOM NAV ══ -->
-<nav class="bottom-nav" id="bottom-nav" style="display:none;">
+<nav class="bottom-nav" id="bottom-nav">
   <button class="nav-item active" id="nav-home" onclick="showPage('home')">
     <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-    <span id="nav-label-home">Maison</span>
+    <span id="nav-label-home">Home</span>
   </button>
   <button class="nav-item" id="nav-projects" onclick="showPage('projects')">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    <span id="nav-label-projects">Projets</span>
+    <span id="nav-label-projects">Projects</span>
   </button>
   <a class="nav-item" href="https://drive.google.com/file/d/1pOStGTaI5-wsSiDnkLDDjqv_oHsZbvST/view?usp=sharing" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
@@ -505,7 +422,6 @@
 </nav>
 
 <script>
-/* ── TRANSLATIONS ── */
 const i18n = {
   fr: {
     eyebrow: 'PORTEFEUILLE',
@@ -549,7 +465,6 @@ const i18n = {
   }
 };
 
-/* ── PROJECTS DATA (bilingual) ── */
 const projects = [
   {
     name: { fr: "Détection d'Intrusion Réseau", en: "Network Intrusion Detection" },
@@ -618,9 +533,8 @@ const projects = [
     name: { fr: "Entonnoir E-commerce", en: "E-commerce Conversion Funnel" },
     tags: ["Python", "Pandas", "Matplotlib", "Missingno"],
     color: "#2a3a1a",
-    accent: "#86efac",    
-img: "https://lh3.googleusercontent.com/d/1F9WXJdS3pb_k7Ilt09fHhXQ5Sbkk1dAL",
-
+    accent: "#86efac",
+    img: "https://lh3.googleusercontent.com/d/1F9WXJdS3pb_k7Ilt09fHhXQ5Sbkk1dAL",
     desc: {
       fr: "Analyse du parcours utilisateur sur une plateforme e-commerce pour identifier les points de friction. Résultat clé : seulement 2.2% des vues aboutissent au panier, mais 77.8% des paniers se convertissent en achat. La friction est au début du tunnel. Segmentation en 3 profils utilisateurs : visiteur, intéressé, acheteur.",
       en: "Analysis of the user journey on an e-commerce platform to identify friction points. Key result: only 2.2% of views lead to cart, but 77.8% of carts convert to purchase. Friction is at the top of the funnel. Users segmented into 3 profiles: visitor, interested, buyer."
@@ -632,6 +546,8 @@ img: "https://lh3.googleusercontent.com/d/1F9WXJdS3pb_k7Ilt09fHhXQ5Sbkk1dAL",
     tags: ["Python", "Pandas", "Matplotlib", "Seaborn"],
     color: "#2a1a3a",
     accent: "#a78bfa",
+        img: "https://drive.google.com/thumbnail?id=1Qo737Cu8noMjZD7xpUjHHtFm_nKhTrOV&sz=w2000",
+
     desc: {
       fr: "Analyse transactionnelle d'un dataset retail en ligne (colonnes : InvoiceNo, StockCode, CustomerID, Country). Identification des 20 produits générant le plus de revenus, distribution géographique du CA, analyse des tendances temporelles (saisonnalité mensuelle et hebdomadaire), et recommandations business actionables.",
       en: "Transactional analysis of an online retail dataset (InvoiceNo, StockCode, CustomerID, Country). Identification of the top 20 revenue-generating products, geographic revenue distribution, time-series trend analysis (monthly and weekly seasonality), and actionable business recommendations."
@@ -643,7 +559,7 @@ img: "https://lh3.googleusercontent.com/d/1F9WXJdS3pb_k7Ilt09fHhXQ5Sbkk1dAL",
     tags: ["Python", "Pandas", "Matplotlib", "Seaborn"],
     color: "#1a2a2a",
     accent: "#67e8f9",
-img: "https://lh3.googleusercontent.com/d/1eg5JH2cJlDW3-lpGzu6HDt-X6pR5293L",
+    img: "https://lh3.googleusercontent.com/d/1eg5JH2cJlDW3-lpGzu6HDt-X6pR5293L",
     desc: {
       fr: "EDA sur 2 000 étudiants pour étudier l'impact de la répartition du temps (étude, sommeil, activités physiques/sociales) sur le GPA et le niveau de stress. Validation de la contrainte d'intégrité temporelle (somme = 24h), GPA moyen observé de 3.12, et création d'une variable catégorielle de groupes d'heures d'étude.",
       en: "EDA on 2,000 students to study how time allocation (study, sleep, physical/social activities) impacts GPA and stress level. Temporal integrity validation (daily total = 24h), observed mean GPA of 3.12, and feature engineering of study hours group categories."
@@ -655,7 +571,7 @@ img: "https://lh3.googleusercontent.com/d/1eg5JH2cJlDW3-lpGzu6HDt-X6pR5293L",
     tags: ["Python", "Scikit-learn", "Pandas", "Seaborn"],
     color: "#3a1a2a",
     accent: "#f472b6",
-img: "https://lh3.googleusercontent.com/d/1ifsAnKFtYeBOIujJ4FUq8PI3SqrDYjG0",
+    img: "https://lh3.googleusercontent.com/d/1ifsAnKFtYeBOIujJ4FUq8PI3SqrDYjG0",
     desc: {
       fr: "Régression sur le dataset Kaggle House Prices : EDA approfondie pour identifier les variables influençant le prix de vente (surface, quartier, année de construction), nettoyage des données, feature engineering, et modélisation prédictive. Préparé pour les assessments techniques du Orange Digital Center.",
       en: "Regression on the Kaggle House Prices dataset: in-depth EDA to identify sale price drivers (area, neighbourhood, year built), data cleaning, feature engineering, and predictive modelling. Prepared for Orange Digital Center technical assessments."
@@ -667,8 +583,7 @@ img: "https://lh3.googleusercontent.com/d/1ifsAnKFtYeBOIujJ4FUq8PI3SqrDYjG0",
     tags: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     color: "#1a1a3a",
     accent: "#818cf8",
-        img: "https://drive.google.com/thumbnail?id=1cGZ9vRABJyqac5YVLBo5ArWyMZRvACFU&sz=w1000",
-
+    img: "https://drive.google.com/thumbnail?id=1cGZ9vRABJyqac5YVLBo5ArWyMZRvACFU&sz=w1000",
     desc: {
       fr: "Classification binaire (survivant / non-survivant) sur le dataset Titanic de Kaggle. EDA complète pour analyser l'impact du genre, de la classe et de l'âge sur la survie, feature engineering, et entraînement d'un modèle de classification. Partie du portfolio end-to-end Orange Digital Center.",
       en: "Binary classification (survived / not survived) on the Kaggle Titanic dataset. Full EDA to analyse the impact of gender, class, and age on survival, feature engineering, and classification model training. Part of the Orange Digital Center end-to-end portfolio."
@@ -681,8 +596,6 @@ img: "https://lh3.googleusercontent.com/d/1ifsAnKFtYeBOIujJ4FUq8PI3SqrDYjG0",
     color: "#2a1a1a",
     accent: "#fb923c",
     img: "https://drive.google.com/thumbnail?id=1USHu7Pt3kiiEpXt21rf6oV7Rq12JuSR2&sz=w1000",
-
-
     badge: { type: "silver", fr: "🥈 2ème Place Hackathon", en: "🥈 2nd Place Hackathon" },
     desc: {
       fr: "Application web développée en équipe lors d'un hackathon, terminée 2ème place. Plateforme de gestion de présence et d'annonces pour un campus universitaire : suivi des étudiants, diffusion d'annonces, interface administrateur. Entièrement réalisée en HTML, CSS et JavaScript vanilla.",
@@ -692,16 +605,11 @@ img: "https://lh3.googleusercontent.com/d/1ifsAnKFtYeBOIujJ4FUq8PI3SqrDYjG0",
   }
 ];
 
-/* ── STATE ── */
-let currentLang = 'fr';
-let typingActive = false;
+let currentLang = 'en';
 
-/* ── LANGUAGE SETUP ── */
 function setLang(lang) {
   currentLang = lang;
   const t = i18n[lang];
-
-  // Update static text
   document.getElementById('eyebrow-text').textContent = t.eyebrow;
   document.getElementById('hero-greeting').textContent = t.greeting;
   document.getElementById('proj-title').textContent = t.projTitle;
@@ -710,22 +618,9 @@ function setLang(lang) {
   document.getElementById('search-input').placeholder = t.searchPlaceholder;
   document.getElementById('nav-label-home').textContent = t.navHome;
   document.getElementById('nav-label-projects').textContent = t.navProjects;
-
-  // Active lang button
   document.getElementById('btn-fr').classList.toggle('active-lang', lang === 'fr');
   document.getElementById('btn-en').classList.toggle('active-lang', lang === 'en');
-
-  // Show UI elements
-  document.getElementById('bottom-nav').style.display = 'flex';
-  document.getElementById('lang-switch').style.display = 'flex';
-
-  // Re-render projects
   renderProjects(projects);
-
-  // Switch to home
-  showPage('home');
-
-  // Start typing
   startTyping(t.phrases);
 }
 
@@ -867,8 +762,8 @@ function filterProjects() {
   renderProjects(filtered);
 }
 
-/* Initial render (will be overwritten after lang select) */
-renderProjects(projects);
+/* Init en anglais par défaut */
+setLang('en');
 </script>
 </body>
 </html>
