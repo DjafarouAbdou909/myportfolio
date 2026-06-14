@@ -231,18 +231,17 @@
   }
 
   .card-thumb {
-    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    min-height: 80px;
   }
 
   .card-thumb img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
   }
 
@@ -546,8 +545,6 @@ const projects = [
     tags: ["Python", "Pandas", "Matplotlib", "Seaborn"],
     color: "#2a1a3a",
     accent: "#a78bfa",
-        img: "https://drive.google.com/thumbnail?id=1Qo737Cu8noMjZD7xpUjHHtFm_nKhTrOV&sz=w2000",
-
     desc: {
       fr: "Analyse transactionnelle d'un dataset retail en ligne (colonnes : InvoiceNo, StockCode, CustomerID, Country). Identification des 20 produits générant le plus de revenus, distribution géographique du CA, analyse des tendances temporelles (saisonnalité mensuelle et hebdomadaire), et recommandations business actionables.",
       en: "Transactional analysis of an online retail dataset (InvoiceNo, StockCode, CustomerID, Country). Identification of the top 20 revenue-generating products, geographic revenue distribution, time-series trend analysis (monthly and weekly seasonality), and actionable business recommendations."
@@ -735,7 +732,7 @@ function renderProjects(list) {
       : '';
     const thumbContent = p.img
       ? `<img src="${p.img}" alt="${p.name[currentLang]}" loading="lazy">`
-      : makeScreen(p.accent);
+      : `<div style="height:180px;display:flex;align-items:center;justify-content:center;width:100%">${makeScreen(p.accent)}</div>`;
     return `
     <div class="project-card" data-name="${p.name[currentLang].toLowerCase()}" data-tags="${p.tags.join(' ').toLowerCase()}">
       <div class="card-thumb" style="background:${p.color}">
