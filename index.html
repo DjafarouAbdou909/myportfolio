@@ -477,6 +477,18 @@ const i18n = {
 
 const projects = [
 {
+    name: { fr: "African Crop Yield Intelligence", en: "African Crop Yield Intelligence" },
+    tags: ["Python", "LightGBM", "GeoPandas", "Streamlit", "CRISP-DM"],
+    color: "#2a2614",
+    accent: "#facc15",
+    badge: { type: "live", fr: "🟢 En ligne", en: "🟢 Live" },
+    desc: {
+      fr: "Prédiction des rendements agricoles en Afrique sur la base ouverte GROW-Africa (145 000 rendements régionaux, 45 pays). Pipeline CRISP-DM complet : climat de chaque saison de culture (NASA POWER, pluie satellite IMERG, évapotranspiration FAO-56), sols SoilGrids et relief Copernicus DEM. Modèles LightGBM évalués sur des régions et des années jamais vues : erreur réduite de 17 à 22 % face aux moyennes historiques, intervalles de prédiction conformes et interprétation par valeurs de Shapley. Application Streamlit en ligne, code et documentation sur GitHub.",
+      en: "Crop yield prediction across Africa on the open GROW-Africa database (145,000 regional yields, 45 countries). End-to-end CRISP-DM pipeline: climate of each crop season (NASA POWER, IMERG satellite rainfall, FAO-56 evapotranspiration), SoilGrids soils and Copernicus DEM terrain. LightGBM models evaluated on unseen regions and future years: 17 to 22% lower error than historical averages, conformal prediction intervals and Shapley value interpretation. Live Streamlit app, code and documentation on GitHub."
+    },
+    link: "https://african-crop-yield-intelligence.streamlit.app/"
+  },
+{
     name: { fr: "AGRI-BOT", en: "AGRI-BOT" },
     tags: ["Django", "Celery", "Groq", "Gemini", "WhatsApp API"],
     color: "#1a3a1a",
